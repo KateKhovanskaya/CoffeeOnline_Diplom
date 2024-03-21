@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<head>
+    <meta charset="UTF-8">
+    <title>New order</title>
+</head>
+<body>
+<h1>New order</h1>
+<!--<p>User: <span sec:authentication="name">NOT FOUND</span></p>-->
+<form action="#" th:action="@{/coffee-online/new-order}" th:object="${coffeeOrder}" method="post">
+    <label for="coffeeName">Name</label>
+    <input type="text" th:field="*{coffeeName}" id="coffeeName" placeholder="coffeeName">
+    <label for="coffeeQuantaty">Quantaty</label>
+    <input type="number" step="any" th:field="*{coffeeQuantaty}" id="coffeeQuantaty" placeholder="coffeeQuantaty">
+    <label for="amount">Amount</label>
+    <input type="number" step="any" th:field="*{amount}" id="amount" placeholder="amount">
+    <input type="submit" value="Add order">
+</form>
+</body>
+</html>

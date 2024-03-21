@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update order status</title>
+</head>
+<body>
+  <h1>Изменить статус заказа</h1>
+  <form action="#" th:action="@{/coffeeManagerService/update-order}" th:object="${order}" method="post">
+    <label for="id">orderNumber</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="id">
+    <label for="userOrderId">orderNumber</label>
+    <input readonly type="number" th:field="*{userOrderId}" id="userOrderId" placeholder="userOrderId">
+    <input readonly type="text" th:field="*{userName}" id="userName" style="display:none">
+    <label for="coffeeName">Name</label>
+    <input type="text" th:field="*{coffeeName}" id="coffeeName" placeholder="coffeeName">
+    <label for="coffeeQuantaty">Quantaty</label>
+    <input type="number" step="any" th:field="*{coffeeQuantaty}" id="coffeeQuantaty" placeholder="coffeeQuantaty">
+    <label for="amount">Amount</label>
+    <input type="number" step="any" th:field="*{amount}" id="amount" placeholder="amount">
+    <label for="status">Status</label>
+    <select th:field="*{orderStatus}" id="status">
+      <option th:value="'IN_PROGRESS'" th:text="IN_PROGRESS"></option>
+      <option th:value="'READY'" th:text="READY"></option>
+      <option th:value="'COMPLETED'" th:text="COMPLETED"></option>
+    </select>
+    <input type="submit" value="Update order">
+  </form>
+</body>
+</html>

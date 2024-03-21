@@ -1,0 +1,22 @@
+server:
+  port: 8100
+spring:
+  application:
+    name: api-gateway
+cloud:
+  gateway:
+    routes:
+      - id: CoffeeClient
+        uri: http://localhost:8080/
+        predicates:
+          - Path=/coffee-online/**
+
+      - id: PaymentService
+        uri: http://localhost:8081/
+        predicates:
+          - Path=/paymentService/**
+
+      - id: CoffeeManagerService
+        uri: http://localhost:8082/
+        predicates:
+          - Path=/coffeeManagerService/**

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+    <h1>Orders</h1>
+<!--    <p>User: <span sec:authentication="name">NOT FOUND</span></p>-->
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Пользователь</th>
+            <th>Наименование</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+            <th>Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order:${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.userName}"></td>
+            <td th:text="${order.coffeeName}"></td>
+            <td th:text="${order.coffeeQuantaty}"></td>
+            <td th:text="${order.amount}"></td>
+            <td th:text="${order.orderStatus}"></td>
+            <td><a th:if="${order.orderStatus.toString()} == 'NEW'" th:href="@{order-paid/{id}(id=${order.id})}">To pay</a></td>
+            <td><a th:href="@{order-delete/{id}(id=${order.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+<!--    <li sec:authorize="hasRole('USER')" class="nav-item"><a href="/coffee-online/new-order">Add order</a></li>-->
+    <li class="nav-item"><a href="/coffee-online/new-order">Add order</a></li>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Paid</title>
+</head>
+<body>
+<h1>Оплата заказа</h1>
+  <form action="#" th:action="@{/coffee-online/order-paid}" th:object="${order}" method="post">
+      <label for="id">orderNumber</label>
+      <input type="number" th:field="*{id}" id="id" placeholder="id">
+      <label for="coffeeName">Name</label>
+      <input type="text" th:field="*{userName}" id="userName" style="display:none">
+      <input type="text" th:field="*{coffeeName}" id="coffeeName" placeholder="coffeeName">
+      <label for="coffeeQuantaty">Quantaty</label>
+      <input type="number" step="any" th:field="*{coffeeQuantaty}" id="coffeeQuantaty" placeholder="coffeeQuantaty">
+      <label for="amount">Amount</label>
+      <input type="number" step="any" th:field="*{amount}" id="amount" placeholder="amount">
+    <input type="submit" value="Paid order">
+  </form>
+</body>
+</html>
