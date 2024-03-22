@@ -8,15 +8,56 @@
 </head>
 <body>
 <h1>New order</h1>
-<!--<p>User: <span sec:authentication="name">NOT FOUND</span></p>-->
+<table style = "display:none;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Наименование</th>
+        <th>Стоимость</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="coffee:${coffeeTypes}" class = "coffee_row">
+        <td th:text="${coffee.id}"></td>
+        <td th:text="${coffee.coffeeName}" class = "coffee_name"></td>
+        <td th:text="${coffee.amount}" class = "coffee_price"></td>
+    </tr>
+    </tbody>
+</table>
 <form action="#" th:action="@{/coffee-online/new-order}" th:object="${coffeeOrder}" method="post">
     <label for="coffeeName">Name</label>
-    <input type="text" th:field="*{coffeeName}" id="coffeeName" placeholder="coffeeName">
+    <select th:field="*{coffeeName}"  id="coffeeName" onchange="showPrice()">
+        <option th:each="coffee:${coffeeTypes}" th:value="${coffee.coffeeName}" th:text="${coffee.coffeeName}"></option>
+    </select>
     <label for="coffeeQuantaty">Quantaty</label>
-    <input type="number" step="any" th:field="*{coffeeQuantaty}" id="coffeeQuantaty" placeholder="coffeeQuantaty">
+    <input type="number" step="any" th:field="*{coffeeQuantaty}" id="coffeeQuantaty" placeholder="coffeeQuantaty" th:value = "1"
+           onchange="showPrice()">
     <label for="amount">Amount</label>
-    <input type="number" step="any" th:field="*{amount}" id="amount" placeholder="amount">
+    <p th:each="coffee:${coffeeTypes}">
+        <span th:if="${coffeeOrder.coffeeName} == 'Американо'" th:text="${coffee.amount}"></span></p>
+    <input  type="number"  th:field="*{amount}" id="amount">
     <input type="submit" value="Add order">
 </form>
+<p class = "my_text"></p>
+<script>
+
+function showPrice(){
+    var selectedCoffeeName = document.getElementById('coffeeName').value;
+    var priceInput = document.getElementById('amount');
+    var coffee_name_list = document.getElementsByClassName('coffee_name');
+    var coffee_price_list = document.getElementsByClassName('coffee_price');
+    var index = 0;
+    for(var i=0; i<coffee_name_list.length;i++){
+        if(coffee_name_list[i].innerText == selectedCoffeeName){
+            index=i;
+        }
+    }
+    var price = parseFloat(coffee_price_list[index].innerText);
+    var coffeeQuantity = document.getElementById('coffeeQuantaty').value;
+    var fullPrice = price * coffeeQuantity;
+    priceInput.setAttribute("value", fullPrice);
+    }
+    showPrice();
+</script>
 </body>
 </html>

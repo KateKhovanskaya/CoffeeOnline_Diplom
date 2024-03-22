@@ -1,5 +1,6 @@
 package com.app.CoffeeManager.controllers;
 
+import com.app.CoffeeManager.model.Coffee;
 import com.app.CoffeeManager.model.Order;
 import com.app.CoffeeManager.services.OrderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -13,13 +14,6 @@ import java.util.List;
 @RequestMapping("coffeeManagerService")
 public class OrderRestController {
     private final OrderService orderService;
-
-//    @GetMapping("/orders")
-//    public List<Order> orders(){
-////        List<Order> orders = orderService.getAllOrders();
-////        model.addAttribute("orders", orders);
-//        return orderService.getAllOrders();
-//    }
 
     @PostMapping("/orders")
     public String loadOrder(@RequestBody String orderFromUser) throws JsonProcessingException {

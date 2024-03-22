@@ -1,7 +1,9 @@
 package com.app.coffe.controllers;
 
+import com.app.coffe.model.Coffee;
 import com.app.coffe.model.CoffeeOrder;
 import com.app.coffe.services.CoffeeOrderService;
+import com.app.coffe.services.CoffeeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,12 +17,11 @@ import java.util.List;
 @RequestMapping("coffee-online")
 public class CoffeeOrderController {
     private final CoffeeOrderService coffeeOrderService;
+    private final CoffeeService coffeeService;
     @GetMapping("/login")
     public String login(){
         return "login";
     }
-//    @PostMapping("/login")
-//    public String loging()
     @GetMapping("/")
     public String mainPage(){
         return "orders";
@@ -32,7 +33,9 @@ public class CoffeeOrderController {
         return "orders";
     }
     @GetMapping("/new-order")
-    public String newOrder(CoffeeOrder coffeeOrder){
+    public String newOrder(CoffeeOrder coffeeOrder, Model model){
+        List<Coffee> coffeeList = coffeeService.loadCoffee();
+        model.addAttribute("coffeeTypes", coffeeList);
         return "new-order";
     }
     @PostMapping("/new-order")
