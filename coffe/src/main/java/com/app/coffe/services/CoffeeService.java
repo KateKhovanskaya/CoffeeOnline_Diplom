@@ -16,7 +16,7 @@ public class CoffeeService {
     private RestTemplate restTemplate;
     public List<Coffee> loadCoffee(){
         List<Coffee> coffeeList = restTemplate
-                .getForObject("http://localhost:8100/coffeeManagerService/coffee", CoffeeList.class)
+                .getForObject("http://localhost:8082/coffeeManagerService/coffee", CoffeeList.class)
                 .getCoffeeList();
         return coffeeList;
     }
